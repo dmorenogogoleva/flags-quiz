@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { Country } from "../quiz-main/quiz-main";
 import { Button } from "../ui/button/button";
 
@@ -9,17 +9,26 @@ interface QuizDynamicProps {
   options?: Country[];
   correctOpt?: Country;
   onNext: VoidFunction;
+  updateCount: Dispatch<SetStateAction<number>>;
+  setRound: Dispatch<SetStateAction<number>>;
 }
 
 export const QuizButtons: React.FC<QuizDynamicProps> = ({
   correctOpt,
   options,
   onNext,
+  updateCount,
+  setRound,
 }) => {
   const [chosenOpt, setChosenOpt] = useState<Country | null>(null);
 
   const onButtonClick = (country: Country) => {
     setChosenOpt(country);
+
+    if (country?.name === correctOpt?.name) {
+      updateCount((prev) => prev + 1);
+    }
+    setRound((prev) => prev + 1);
   };
 
   const resetState = () => {
@@ -33,6 +42,7 @@ export const QuizButtons: React.FC<QuizDynamicProps> = ({
         {options?.map((opt, i) => (
           <Button
             key={i}
+            disabled={!!chosenOpt}
             onClick={() => onButtonClick(opt)}
             status={chosenOpt ? getStatus(opt, chosenOpt, correctOpt) : "unset"}
           >
