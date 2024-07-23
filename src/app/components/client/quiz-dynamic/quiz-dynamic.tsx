@@ -8,23 +8,30 @@ import styles from "./quiz-dynamic.module.css";
 interface QuizDynamicProps {
   options?: Country[];
   correctOpt?: Country;
+  onNext: VoidFunction;
 }
 
-export const QuizDynamic: React.FC<QuizDynamicProps> = ({
+export const QuizButtons: React.FC<QuizDynamicProps> = ({
   correctOpt,
   options,
+  onNext,
 }) => {
-  const [chosenOpt, setChosenOpt] = useState<Country>();
+  const [chosenOpt, setChosenOpt] = useState<Country | null>(null);
 
   const onButtonClick = (country: Country) => {
     setChosenOpt(country);
+  };
+
+  const resetState = () => {
+    setChosenOpt(null);
+    onNext();
   };
 
   if (!options) return <div>loading...</div>;
 
   return (
     <div>
-      <div className={styles.QuizDynamic}>
+      <div className={styles.buttons}>
         {options.map((opt, i) => (
           <Button
             key={i}
@@ -35,6 +42,9 @@ export const QuizDynamic: React.FC<QuizDynamicProps> = ({
           </Button>
         ))}
       </div>
+      <br />
+      <br />
+      {chosenOpt && <Button onClick={resetState}>next</Button>}
     </div>
   );
 };

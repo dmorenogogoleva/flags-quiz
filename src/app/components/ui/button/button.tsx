@@ -4,15 +4,15 @@ import { clsx } from "clsx";
 import styles from "./button.module.css";
 
 interface ButtonProps {
-  onClick?: VoidFunction;
   children?: React.ReactNode;
-  status: "unset" | "correct" | "wrong";
+  status?: "unset" | "correct" | "wrong";
+  onClick?: VoidFunction;
 }
 
 export const Button: React.FC<ButtonProps> = ({
   onClick,
   children,
-  status,
+  status = "unset",
 }) => {
   return (
     <button

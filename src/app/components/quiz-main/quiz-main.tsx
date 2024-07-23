@@ -6,7 +6,7 @@ import sample from "lodash.sample";
 import sampleSize from "lodash.samplesize";
 import styles from "./quiz-main.module.css";
 
-import { QuizDynamic } from "../client/quiz-dynamic/quiz-dynamic";
+import { QuizButtons } from "../client/quiz-dynamic/quiz-dynamic";
 import { useRerender } from "@/app/hooks/useRerender";
 
 export interface Country {
@@ -41,10 +41,11 @@ export const QuizMain: React.FC<QuizMainProps> = ({ countries }) => {
         // todo: move to func
         src={`https://flagcdn.com/${correctOpt?.code?.toLowerCase()}.svg`}
       />
-      <button type="button" onClick={rerenderAction}>
-        triggerReshuffle
-      </button>
-      <QuizDynamic correctOpt={correctOpt} options={options} />
+      <QuizButtons
+        onNext={rerenderAction}
+        correctOpt={correctOpt}
+        options={options}
+      />
     </div>
   );
 };
