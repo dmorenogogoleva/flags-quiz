@@ -2,3 +2,11 @@
   max-width: 600px;
   border: 2px solid #bfb3b3;
 }
+
+.buttons {
+  display: flex;
+  margin-top: 48px;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: 16px;
+}
