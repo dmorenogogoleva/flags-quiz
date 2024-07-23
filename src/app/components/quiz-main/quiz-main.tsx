@@ -1,12 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 import React, { useEffect, useMemo, useState } from "react";
-import shuffle from "lodash.shuffle";
 import sample from "lodash.sample";
 import sampleSize from "lodash.samplesize";
 import styles from "./quiz-main.module.css";
 
-import { QuizButtons } from "../client/quiz-dynamic/quiz-dynamic";
+import { QuizButtons } from "../quiz-dynamic/quiz-buttons";
 import { useRerender } from "@/app/hooks/useRerender";
 
 export interface Country {

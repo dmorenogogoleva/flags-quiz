@@ -1,9 +1,9 @@
 "use client";
 import React, { useState } from "react";
-import { Country } from "../../quiz-main/quiz-main";
-import { Button } from "../../ui/button/button";
+import { Country } from "../quiz-main/quiz-main";
+import { Button } from "../ui/button/button";
 
-import styles from "./quiz-dynamic.module.css";
+import styles from "./quiz-buttons.module.css";
 
 interface QuizDynamicProps {
   options?: Country[];
@@ -27,12 +27,10 @@ export const QuizButtons: React.FC<QuizDynamicProps> = ({
     onNext();
   };
 
-  if (!options) return <div>loading...</div>;
-
   return (
     <div>
       <div className={styles.buttons}>
-        {options.map((opt, i) => (
+        {options?.map((opt, i) => (
           <Button
             key={i}
             onClick={() => onButtonClick(opt)}
