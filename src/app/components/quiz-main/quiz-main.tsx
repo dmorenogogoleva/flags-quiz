@@ -74,7 +74,7 @@ export const QuizMain: React.FC<QuizMainProps> = ({ countries }) => {
     <>
       <br />
       <span className={styles.count}>
-        you&apos;re score: {count}/{MAX_ROUND_NUM}. round: {round}
+        your score: {count}/{MAX_ROUND_NUM}. round: {round}
       </span>
       <br />
       <br />
