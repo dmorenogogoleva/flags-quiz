@@ -7,8 +7,9 @@ import styles from "./quiz-main.module.css";
 
 import { Button } from "../ui/button/button";
 import { CommonButton } from "../ui/common-button/common-button";
+import { GameOverScreen } from "../game-over-screen/game-over-screen";
 
-const MAX_ROUND_NUM = 10;
+export const MAX_ROUND_NUM = 10;
 
 export interface Country {
   code?: string;
@@ -58,23 +59,14 @@ export const QuizMain: React.FC<QuizMainProps> = ({ countries }) => {
   // todo: work on the last screen
   if (round > MAX_ROUND_NUM) {
     return (
-      <>
-        <h1>G A M E O V E R</h1>
-        <p>
-          your result: <h3>{count}</h3> correct answers of {MAX_ROUND_NUM}
-        </p>
-        <br />
-        <br />
-        <Button
-          onClick={() => {
-            resetState();
-            setRound(1);
-            setCount(0);
-          }}
-        >
-          start again
-        </Button>
-      </>
+      <GameOverScreen
+        count={count}
+        onClick={() => {
+          resetState();
+          setRound(1);
+          setCount(0);
+        }}
+      />
     );
   }
 
