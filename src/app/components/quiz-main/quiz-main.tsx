@@ -24,7 +24,7 @@ export const QuizMain: React.FC<QuizMainProps> = ({ countries }) => {
   const [options, setOptions] = useState<Country[]>();
   const [correctOpt, setCorrectOpt] = useState<Country>();
   const [count, setCount] = useState(0);
-  const [round, setRound] = useState(0);
+  const [round, setRound] = useState(1);
   const [chosenOpt, setChosenOpt] = useState<Country | null>(null);
 
   const onButtonClick = (country: Country) => {
@@ -33,7 +33,6 @@ export const QuizMain: React.FC<QuizMainProps> = ({ countries }) => {
     if (country?.name === correctOpt?.name) {
       setCount((prev) => prev + 1);
     }
-    setRound((prev) => prev + 1);
   };
 
   const resetState = () => {
@@ -57,7 +56,7 @@ export const QuizMain: React.FC<QuizMainProps> = ({ countries }) => {
   if (!options) return "loading.....";
 
   // todo: work on the last screen
-  if (round >= MAX_ROUND_NUM) {
+  if (round > MAX_ROUND_NUM) {
     return (
       <>
         <h1>G A M E O V E R</h1>
@@ -69,7 +68,8 @@ export const QuizMain: React.FC<QuizMainProps> = ({ countries }) => {
         <Button
           onClick={() => {
             resetState();
-            setRound(0);
+            setRound(1);
+            setCount(0);
           }}
         >
           start again
@@ -82,8 +82,7 @@ export const QuizMain: React.FC<QuizMainProps> = ({ countries }) => {
     <div>
       <br />
       <span className={styles.count}>
-        you&apos;re score: {count}/{MAX_ROUND_NUM}. round:{" "}
-        {!!chosenOpt ? round : round + 1}
+        you&apos;re score: {count}/{MAX_ROUND_NUM}. round: {round}
       </span>
       <br />
       <br />
@@ -110,7 +109,16 @@ export const QuizMain: React.FC<QuizMainProps> = ({ countries }) => {
         </div>
         <br />
         <br />
-        {chosenOpt && <CommonButton onClick={resetState}>next</CommonButton>}
+        {chosenOpt && (
+          <CommonButton
+            onClick={() => {
+              resetState();
+              setRound((prev) => prev + 1);
+            }}
+          >
+            next
+          </CommonButton>
+        )}
       </div>
     </div>
   );
