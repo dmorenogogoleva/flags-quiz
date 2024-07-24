@@ -7,6 +7,12 @@
   min-height: 100vh;
 }
 
+@media (max-width: 650px) {
+  .container {
+    padding: 0 12px;
+  }
+}
+
 .container {
   max-width: 800px;
   margin-inline: auto;

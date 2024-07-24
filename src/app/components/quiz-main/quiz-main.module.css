@@ -1,7 +1,14 @@
 .image {
   max-width: 600px;
   max-height: 300px;
+  width: 100%;
   border: 2px solid #bfb3b3;
+}
+
+@media (max-width: 650px) {
+  .image {
+    max-height: 200px;
+  }
 }
 
 .buttons {

@@ -30,10 +30,9 @@ export const GameOverScreen: React.FC<GameOverScreenProps> = ({
           </span>
         )}
       </p>
-      <br />
-      <br />
-      <br />
-      <Button onClick={onClick}>start again</Button>
+      <Button className={styles.button} onClick={onClick}>
+        start again
+      </Button>
     </div>
   );
 };

@@ -71,7 +71,7 @@ export const QuizMain: React.FC<QuizMainProps> = ({ countries }) => {
   }
 
   return (
-    <div>
+    <>
       <br />
       <span className={styles.count}>
         you&apos;re score: {count}/{MAX_ROUND_NUM}. round: {round}
@@ -112,7 +112,7 @@ export const QuizMain: React.FC<QuizMainProps> = ({ countries }) => {
           </CommonButton>
         )}
       </div>
-    </div>
+    </>
   );
 };
 

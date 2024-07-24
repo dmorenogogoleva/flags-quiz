@@ -11,6 +11,16 @@
 }
 
 .title {
-    letter-spacing: 20px;
-    font-size: 70px;
+  letter-spacing: 20px;
+  font-size: 70px;
+}
+
+.button {
+  margin-top: 48px;
+}
+
+@media (max-width: 650px) {
+  .button {
+    margin-top: 32px;
+  }
 }
