@@ -1,0 +1,35 @@
+.button {
+  align-items: center;
+  /* background-color: #d5edf6; */
+  background-color: transparent;
+  border: 1px solid #266db6;
+  box-sizing: border-box;
+  color: #00132c;
+  cursor: pointer;
+  display: inline-flex;
+  fill: #000;
+  font-family: Inter, sans-serif;
+  font-size: 32px;
+  line-height: 40px;
+  justify-content: center;
+  min-width: 140px;
+  outline: 0;
+  padding: 0 17px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  padding: 5px 23px;
+}
+
+.button:hover {
+  background-color: #d5edf6;
+}
+
+@media (min-width: 768px) {
+  .button {
+    min-width: 170px;
+  }
+}

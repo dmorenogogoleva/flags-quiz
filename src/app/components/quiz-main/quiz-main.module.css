@@ -4,9 +4,9 @@
 }
 
 .buttons {
-  display: flex;
   margin-top: 48px;
   width: 100%;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(100px, 1fr));
   gap: 16px;
 }

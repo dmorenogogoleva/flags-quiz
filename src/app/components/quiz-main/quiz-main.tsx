@@ -6,6 +6,7 @@ import sampleSize from "lodash.samplesize";
 import styles from "./quiz-main.module.css";
 
 import { Button } from "../ui/button/button";
+import { CommonButton } from "../ui/common-button/common-button";
 
 const MAX_ROUND_NUM = 2;
 
@@ -109,7 +110,7 @@ export const QuizMain: React.FC<QuizMainProps> = ({ countries }) => {
         </div>
         <br />
         <br />
-        {chosenOpt && <Button onClick={resetState}>next</Button>}
+        {chosenOpt && <CommonButton onClick={resetState}>next</CommonButton>}
       </div>
     </div>
   );
