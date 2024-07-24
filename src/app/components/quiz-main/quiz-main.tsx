@@ -8,7 +8,7 @@ import styles from "./quiz-main.module.css";
 import { Button } from "../ui/button/button";
 import { CommonButton } from "../ui/common-button/common-button";
 
-const MAX_ROUND_NUM = 2;
+const MAX_ROUND_NUM = 10;
 
 export interface Country {
   code?: string;
@@ -81,9 +81,9 @@ export const QuizMain: React.FC<QuizMainProps> = ({ countries }) => {
   return (
     <div>
       <br />
-      <br />
-      <span>
-        {count}/{round}
+      <span className={styles.count}>
+        you&apos;re score: {count}/{MAX_ROUND_NUM}. round:{" "}
+        {!!chosenOpt ? round : round + 1}
       </span>
       <br />
       <br />
