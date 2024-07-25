@@ -24,6 +24,7 @@ interface QuizMainProps {
 export const QuizMain: React.FC<QuizMainProps> = ({ countries }) => {
   const [options, setOptions] = useState<Country[]>();
   const [correctOpt, setCorrectOpt] = useState<Country>();
+  const [prevCorrectOpts, setPrevCorrectOpts] = useState<string[]>([]);
   const [count, setCount] = useState(0);
   const [round, setRound] = useState(1);
   const [chosenOpt, setChosenOpt] = useState<Country | null>(null);
@@ -39,6 +40,12 @@ export const QuizMain: React.FC<QuizMainProps> = ({ countries }) => {
     }
   };
 
+  const onNext = () => {
+    setPrevCorrectOpts((prev) => [...prev, correctOpt?.tld || ""]);
+    resetState();
+    setRound((prev) => prev + 1);
+  };
+
   const resetState = () => {
     setChosenOpt(null);
     setInitialState();
@@ -47,11 +54,14 @@ export const QuizMain: React.FC<QuizMainProps> = ({ countries }) => {
 
   const setInitialState = useCallback(() => {
     if (!countries) return;
-    const opts = sampleSize(countries, 4);
+    const filteredCountries = countries.filter(
+      (country) => !prevCorrectOpts?.includes(country.tld)
+    );
+    const opts = sampleSize(filteredCountries, 4);
     const correctOpt = sample(opts) as Country;
     setOptions(opts);
     setCorrectOpt(correctOpt);
-  }, [countries]);
+  }, [countries, prevCorrectOpts]);
 
   useEffect(() => {
     setInitialState();
@@ -60,7 +70,6 @@ export const QuizMain: React.FC<QuizMainProps> = ({ countries }) => {
   // todo: add stub
   if (!options) return "loading.....";
 
-  // todo: work on the last screen
   if (round > MAX_ROUND_NUM) {
     return (
       <GameOverScreen
@@ -69,6 +78,7 @@ export const QuizMain: React.FC<QuizMainProps> = ({ countries }) => {
           resetState();
           setRound(1);
           setCount(0);
+          setPrevCorrectOpts([]);
         }}
       />
     );
@@ -109,16 +119,7 @@ export const QuizMain: React.FC<QuizMainProps> = ({ countries }) => {
           </div>
           <br />
           <br />
-          {chosenOpt && (
-            <CommonButton
-              onClick={() => {
-                resetState();
-                setRound((prev) => prev + 1);
-              }}
-            >
-              next
-            </CommonButton>
-          )}
+          {chosenOpt && <CommonButton onClick={onNext}>next</CommonButton>}
         </div>
       ) : (
         "loading...."
