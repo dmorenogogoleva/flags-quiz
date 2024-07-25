@@ -27,6 +27,9 @@ export const QuizMain: React.FC<QuizMainProps> = ({ countries }) => {
   const [count, setCount] = useState(0);
   const [round, setRound] = useState(1);
   const [chosenOpt, setChosenOpt] = useState<Country | null>(null);
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  const imageSrc = `https://flagcdn.com/${correctOpt?.code?.toLowerCase()}.svg`;
 
   const onButtonClick = (country: Country) => {
     setChosenOpt(country);
@@ -39,6 +42,7 @@ export const QuizMain: React.FC<QuizMainProps> = ({ countries }) => {
   const resetState = () => {
     setChosenOpt(null);
     setInitialState();
+    setImageLoaded(false);
   };
 
   const setInitialState = useCallback(() => {
@@ -79,39 +83,46 @@ export const QuizMain: React.FC<QuizMainProps> = ({ countries }) => {
       <br />
       <br />
       <img
+        onLoad={() => {
+          setImageLoaded(true);
+        }}
         alt=""
         className={styles.image}
-        // todo: move to func
-        src={`https://flagcdn.com/${correctOpt?.code?.toLowerCase()}.svg`}
+        key={imageSrc}
+        src={imageSrc}
       />
-      <div>
-        <div className={styles.buttons}>
-          {options?.map((opt, i) => (
-            <Button
-              key={i}
-              disabled={!!chosenOpt}
-              onClick={() => onButtonClick(opt)}
-              status={
-                chosenOpt ? getStatus(opt, chosenOpt, correctOpt) : "unset"
-              }
+      {imageLoaded ? (
+        <div>
+          <div className={styles.buttons}>
+            {options?.map((opt, i) => (
+              <Button
+                key={i}
+                disabled={!!chosenOpt}
+                onClick={() => onButtonClick(opt)}
+                status={
+                  chosenOpt ? getStatus(opt, chosenOpt, correctOpt) : "unset"
+                }
+              >
+                {opt.name}
+              </Button>
+            ))}
+          </div>
+          <br />
+          <br />
+          {chosenOpt && (
+            <CommonButton
+              onClick={() => {
+                resetState();
+                setRound((prev) => prev + 1);
+              }}
             >
-              {opt.name}
-            </Button>
-          ))}
+              next
+            </CommonButton>
+          )}
         </div>
-        <br />
-        <br />
-        {chosenOpt && (
-          <CommonButton
-            onClick={() => {
-              resetState();
-              setRound((prev) => prev + 1);
-            }}
-          >
-            next
-          </CommonButton>
-        )}
-      </div>
+      ) : (
+        "loading...."
+      )}
     </>
   );
 };
