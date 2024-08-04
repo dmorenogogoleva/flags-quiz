@@ -10,8 +10,10 @@ interface GameOverScreenProps {
   onClick: VoidFunction;
 }
 
+const low = "you can do better. Keep going! 😘 👊";
+
 export const GameOverScreen: React.FC<GameOverScreenProps> = ({
-  count,
+  count = 0,
   onClick,
 }) => {
   return (
@@ -26,7 +28,20 @@ export const GameOverScreen: React.FC<GameOverScreenProps> = ({
             you have <b>{(count / MAX_ROUND_NUM) * 100}%</b> correct answers{" "}
             <br />
             <br />
-            it&apos;s awesome! 🎉
+            {
+              {
+                1: low,
+                2: low,
+                3: low,
+                4: "not bad 😎 I bet you can earn more!",
+                5: `great job! You're on a roll! 💪 Keep it up!`,
+                6: `awesome! You're getting really good at this! 🎉 Go for more!`,
+                7: `impressive! You're a star! 🌟 Can you hit the top?`,
+                8: `fantastic! You're so close to perfection! 🌟 Keep pushing!`,
+                9: `amazing! Just one step away from greatness! 🔥 Go for the perfect score!`,
+                10: `perfect! You're a true champion! 🏆 Enjoy your victory!`,
+              }[count]
+            }
           </span>
         )}
       </p>
