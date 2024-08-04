@@ -17,6 +17,16 @@ export default async function Page() {
   if (!data) return <div>500</div>;
 
   return (
-    <main className={styles.container}>{<QuizMain countries={data} />}</main>
+    <>
+      <main className={styles.container}>{<QuizMain countries={data} />}</main>
+      <footer>
+        <p>
+          Created by{" "}
+          <a target="_blank" href="https://iwanttobealight.ru/">
+            Daria Moreno-Gogoleva
+          </a>
+        </p>
+      </footer>
+    </>
   );
 }
