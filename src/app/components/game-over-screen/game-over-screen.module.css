@@ -20,6 +20,10 @@
 }
 
 @media (max-width: 650px) {
+  .screen {
+    padding-bottom: 32px;
+  }
+
   .button {
     margin-top: 32px;
   }
